@@ -1,0 +1,14 @@
+.mat-card{
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}
+
+@media (max-width: 600px) {
+
+    .mat-card{
+        position: absolute;
+        left: 19%;
+        top: 35%;
+    }
+}

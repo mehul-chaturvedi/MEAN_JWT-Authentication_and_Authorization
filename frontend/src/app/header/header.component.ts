@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 title;
+home=false;
   ngOnInit() {
-    this.title = 'User Login'
+    this.userService.currentTitle.subscribe(res=>{
+      this.title = res;
+      console.log(this.title)
+      if(this.title === 'Home'){
+        this.home = true;
+      } else if(this.title == 'User Login') {
+        this.home = false;
+      }
+    })
+    this.title = 'Home'
+  }
+
+  logout(){
+      sessionStorage.removeItem('token');
+     this.router.navigate(['/login']);
   }
 
 }

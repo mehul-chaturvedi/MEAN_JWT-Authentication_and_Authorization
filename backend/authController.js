@@ -12,7 +12,7 @@ router.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
         if (err) { return res.status(500).send('Error in server') }
         if (!user) { return res.status(404).send('User not found') }
-        if (req.body.pass !== user.password) { res.status(404).send({ auth: false, token: null }) }
+        if (req.body.password !== user.password) { res.status(404).send({ auth: false, token: null }) }
 
         var token = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 86400
@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
     User.create({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.pass
+        password: req.body.password
     }, (err, user) => {
         if (err) {
             res.status(500).send('Prob')
