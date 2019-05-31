@@ -10,15 +10,18 @@ var User = require('./usermodel');
 
 router.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
+
         if (err) { return res.status(500).send('Error in server') }
         if (!user) { return res.status(404).send('User not found') }
         if (req.body.password !== user.password) { res.status(404).send({ auth: false, token: null }) }
-
-        var token = jwt.sign({ id: user._id }, config.secret, {
-            expiresIn: 86400
-        })
-
-        res.status(200).send({ auth: true, token: token });
+        else{
+            var token = jwt.sign({ id: user._id }, config.secret, {
+                expiresIn: 86400
+            })
+    
+            res.status(200).send({ auth: true, token: token });
+        }
+        
 
     })
 })

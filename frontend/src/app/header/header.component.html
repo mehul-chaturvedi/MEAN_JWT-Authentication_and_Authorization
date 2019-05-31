@@ -1,17 +1,14 @@
 <mat-toolbar class="mat-elevation-z6">
 
-  <mat-toolbar-row *ngIf="home">
+  <mat-toolbar-row>
     <h1>
       {{title}}
     </h1>
-    <button mat-raised-button (click) = "logout()">Logout</button>
-
+    <div class="headbutton">
+    <button *ngIf="home" mat-raised-button (click)="logout()">Logout</button>
+    <a *ngIf="login" routerLink="/signup">Sign Up</a>
+    <a *ngIf="signup" routerLink="/login">Login</a>
+  </div>
   </mat-toolbar-row>
-  <mat-toolbar-row *ngIf = '!home'>
-      <h1>
-        {{title}}
-      </h1>
-  
-    </mat-toolbar-row>
 
 </mat-toolbar>

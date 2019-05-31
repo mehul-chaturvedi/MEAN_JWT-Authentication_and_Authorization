@@ -5,3 +5,15 @@
   .mat-icon-button{
     background-color: aliceblue;
   }
+
+  .headbutton{
+    position: absolute;
+    left: 90%;
+  }
+
+  @media (max-width: 600px) {
+    .headbutton{
+      position: absolute;
+      left: 80%;
+    }
+  }

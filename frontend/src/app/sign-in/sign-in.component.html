@@ -12,13 +12,14 @@
       </mat-form-field>
       <br />
       <mat-form-field>
-          <input formControlName='password' [type]="hide ? 'text' : 'password'" matInput placeholder="Enter Password">
-          <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer">{{hide ? 'visibility' : 'visibility_off'}}
-          </mat-icon>
+        <input formControlName='password' [type]="hide ? 'text' : 'password'" matInput placeholder="Enter Password">
+        <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer">{{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
         <mat-error *ngIf="loginForm.get('password').hasError('required')">Please enter the password</mat-error>
       </mat-form-field>
       <br />
-      <button type="submit" [disabled]="loginForm.invaild" mat-raised-button>Sign In</button>
+      <button type="submit" [disabled]="loginForm.invaild" mat-raised-button>Login</button> ...or <a
+        routerLink="/signup">Create a new account</a>
     </form>
   </mat-card-content>
 </mat-card>

@@ -13,28 +13,34 @@ export class SignInComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router) { }
-  error: any;
+  error: any = { error: '' };
   ngOnInit() {
     if (sessionStorage.getItem('token')) {
       this.router.navigate(['/home']);
+      this.userService.headerTitle('Home')
+    } else {
+      this.userService.headerTitle('User Login')
     }
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     })
 
-    this.userService.headerTitle('User Login')
   }
 
   loginSubmit(form: FormGroup) {
-    console.log(form.value, 'form');
     this.userService.getUser(form.value).subscribe((res) => {
       if (res) {
         sessionStorage.setItem('token', res['token'])
         this.router.navigate(['/home']);
+        this.userService.headerTitle('Home')
       }
     }, (err) => {
-      this.error = err;
+      if (err.error.token == null) {
+        this.error.error = 'Email or Password is Incorrect'
+      } else {
+        this.error = err;
+      }
     })
   }
 

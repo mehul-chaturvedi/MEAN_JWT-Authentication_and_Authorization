@@ -22,4 +22,5 @@ export class UserService {
   headerTitle(title){
     this.headTitle.next(title);
   }
+
 }
